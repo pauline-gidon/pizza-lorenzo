@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Products;
+use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,7 +21,7 @@ class ProductsRepository extends ServiceEntityRepository
         parent::__construct($registry, Products::class);
     }
 
-    public function add(Products $entity, bool $flush = false): void
+    public function add(Product $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ProductsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Products $entity, bool $flush = false): void
+    public function remove(Product $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
