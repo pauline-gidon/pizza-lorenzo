@@ -1,6 +1,18 @@
-@import "custom";
+@use "custom";
 @import "~bootstrap/scss/bootstrap";
 
+$primary-color: rgb(255, 143, 14);
+$text-color: #333;
+
 body {
-    background-color: lightgray;
+    background-color: $primary-color;
+}
+
+a {
+    text-decoration: none;
+    color: $text-color;
+}
+
+.container .card {
+    background-color: lighten($primary-color, 20%);
 }
