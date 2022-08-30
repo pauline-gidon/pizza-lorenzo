@@ -21,9 +21,10 @@
             </tr>
             <tr>
                 <th>Pictures</th>
-                <td>{{ product.pictures }}</td>
+                <td><img src="{{ vich_uploader_asset(product, 'picturesFile') }}"/> </td>
+
             </tr>
-           
+
         </tbody>
     </table>
 

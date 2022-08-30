@@ -3,13 +3,22 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use DateTimeImmutable;
+use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
+use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
 
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-class Product
+class Product implements TimestampableInterface
 {
+    use TimestampableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -24,8 +33,11 @@ class Product
     #[ORM\Column(type:'text')]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $pictures = null;
+
+    #[Vich\UploadableField(mapping: 'product_pictures', fileNameProperty: 'pictures')]
+    private ?File $picturesFile;
 
     #[ORM\Column]
     private ?int $stock = null;
@@ -83,16 +95,29 @@ class Product
         return $this;
     }
 
-    public function getPictures(): ?string
+    public function setPicturesFile(?File $picturesFile = null): void
+    {
+        $this->picturesFile = $picturesFile;
+
+        if (null !== $picturesFile) {
+            $this->updatedAt = new DateTimeImmutable();
+        }
+    }
+
+    public function getPicturesFile(): ?File
+    {
+        return $this->picturesFile;
+    }
+
+    public function getPictures() : ?string
     {
         return $this->pictures;
     }
 
-    public function setPictures(string $pictures): self
+    public function setPictures(string $pictures): void
     {
         $this->pictures = $pictures;
 
-        return $this;
     }
 
     public function getStock(): ?int
@@ -148,4 +173,7 @@ class Product
 
         return $this;
     }
+
+
+
 }

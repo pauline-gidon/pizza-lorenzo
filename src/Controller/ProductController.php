@@ -21,6 +21,25 @@ class ProductController extends AbstractController
         ]);
     }
 
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    public function new(Request $request, ProductRepository $productRepository): Response
+    {
+        $product = new Product();
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $productRepository->add($product, true);
+
+            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('product/new.html.twig', [
+            'product' => $product,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(Product $product): Response
     {
@@ -28,5 +47,6 @@ class ProductController extends AbstractController
             'product' => $product,
         ]);
     }
+
 
 }
