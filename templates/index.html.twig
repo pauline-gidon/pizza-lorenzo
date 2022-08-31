@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Bienvenue sur Pizza Lorenzo !{% endblock %}
 
 {% block body %}
     <div>
@@ -28,6 +28,13 @@
         </div>
     </div>
 
+<div class="container mt-3">
+    <div class="card p-3">
+        <a href="{{ path('product_index') }}" class="m-auto">
+            <h1 class="text-uppercase">liste des produits</h1>
+        </a>
+    </div>
+</div>
 
 {% endblock %}
 
