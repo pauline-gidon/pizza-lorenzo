@@ -32,7 +32,7 @@ class RegistrationController extends AbstractController
             );
 
             $user->setAdress('');
-            $user->setCreatedAt(new DateTimeImmutable(time()));
+            $user->setCreatedAt(new DateTimeImmutable());
 
             $entityManager->persist($user);
             $entityManager->flush();
