@@ -18,7 +18,7 @@ security:
             provider: app_user_provider
             logout:
                 path: app_logout
-                target: app_default
+                target: home
             form_login:
                 # "app_login" is the name of the route created previously
                 login_path: app_login
