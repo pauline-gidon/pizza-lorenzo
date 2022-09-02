@@ -35,6 +35,11 @@
         </a>
     </div>
 </div>
+    {% if validateOrder is defined %}
+        {% if not validateOrder %}
+            <div class="d-none validate"></div>
+        {% endif %}
+    {% endif %}
 
 {% endblock %}
 

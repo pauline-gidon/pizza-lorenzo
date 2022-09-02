@@ -3,7 +3,6 @@ function reRender(products)
 {
     productContainer.innerHTML = '';
     products.forEach(product => {
-        let str = JSON.stringify(product);
         let productElement = document.createElement('div');
         productElement.classList.add('card','card-list-product');
 
@@ -14,7 +13,7 @@ function reRender(products)
                 <img src="uploads/pictures/products/${product.pictures}" class="full-img"/>
                 <p class="card-text">${product.description}</p>
                 <p>${product.price} €</p>
-                <p class="btn btn-primary add-order" data-product-name="${product.name}" data-product-price="${product.price}">Ajouter à ma commande</p>
+                <p class="btn btn-primary add-order" data-product-name="${product.name}" data-product-price="${product.price}" data-product-id="${product.id}">Ajouter à ma commande</p>
             </div>
         `;
         productContainer.append(productElement);
@@ -36,6 +35,7 @@ async function fetchProductsByCategory()
 function addMyOrder(){
 
     let productOrder = {
+        "id": this.dataset.productId,
         "name": this.dataset.productName,
         "price": this.dataset.productPrice,
     }
@@ -57,7 +57,6 @@ function getBasket(){
 function addProductBasket(product){
     let basket = getBasket();
     let foundProduct = basket.find(p => p.name == product.name);
-    console.log(foundProduct);
     if(foundProduct != undefined)
     {
         foundProduct.quantity++;
@@ -66,24 +65,6 @@ function addProductBasket(product){
         basket.push(product);
     }
     saveBasket(basket);
-}
-function removeProductBasket(product){
-    let basket = getBasket();
-    basket = basket.filter(p => p.name != product.name);
-    saveBasket(basket);
-}
-function changeQuantity(product, quantity){
-    let basket = getBasket();
-    let foundProduct = basket.find(p => p.name == product.name);
-    if(foundProduct != undefined)
-    {
-        foundProduct.quantity += quantity;
-        if(foundProduct.quantity <= 0 ){
-            removeProductBasket(foundProduct);
-        }else{
-            saveBasket(basket);
-        }
-    }
 }
 
 document.addEventListener('DOMContentLoaded', function(){

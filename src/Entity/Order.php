@@ -6,6 +6,7 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -14,6 +15,7 @@ class Order
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['order:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
@@ -23,7 +25,7 @@ class Order
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\OneToMany(mappedBy: 'Orderbis', targetEntity: OrderProduct::class)]
-    private Collection $orderProducts;
+    private ?Collection $orderProducts = null;
 
     #[ORM\OneToOne(inversedBy: 'orderbis', cascade: ['persist', 'remove'])]
     private ?Payment $Payment = null;
@@ -68,7 +70,7 @@ class Order
     /**
      * @return Collection<int, OrderProduct>
      */
-    public function getOrderProducts(): Collection
+    public function getOrderProducts(): ?Collection
     {
         return $this->orderProducts;
     }

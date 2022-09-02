@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mode de payment{% endblock %}
+
+{% block body %}
+    <h1>choisissez votre mode de payment</h1>
+
+    {{ form_start(form, {'attr': {'id': 'paymentForm'}}) }}
+
+    {{ form_row(form.type) }}
+
+    <input id="orderId" type="hidden" value="{{ orderId }}">
+
+    <button class="btn">{{ button_label|default('Valider') }}</button>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let paymentRoute = "{{ path('order_fetch_payment') }}";
+    </script>
+    <script src="{{ asset('js/fetchPayment.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vous êtes dans votre panier !{% endblock %}
+
+{% block body %}
+    <div class="basket">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Prix unitaire</th>
+                <th scope="col">Sous total</th>
+            </tr>
+            </thead>
+            <tbody id="containner-panier">
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/panier.js') }}"></script>
+{% endblock %}
