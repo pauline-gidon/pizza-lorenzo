@@ -43,7 +43,7 @@ class Product implements TimestampableInterface
     private ?string $pictures = null;
 
     #[Vich\UploadableField(mapping: 'product_pictures', fileNameProperty: 'pictures')]
-    private ?File $picturesFile;
+    private ?File $picturesFile = null;
 
     #[ORM\Column]
     private ?int $stock = null;
