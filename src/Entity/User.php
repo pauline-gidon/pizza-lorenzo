@@ -45,7 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'userbis', targetEntity: Payment::class)]
     private Collection $Payment;
 
-    #[ORM\OneToMany(mappedBy: 'userbis', targetEntity: order::class)]
+    #[ORM\OneToMany(mappedBy: 'userbis', targetEntity: Order::class)]
     private Collection $orderbis;
 
     public function __construct()
@@ -220,7 +220,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeOrderbi(order $orderbis): self
+    public function removeOrderbis(order $orderbis): self
     {
         if ($this->orderbis->removeElement($orderbis)) {
             // set the owning side to null (unless already changed)
