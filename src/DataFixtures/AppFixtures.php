@@ -14,22 +14,22 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-        // for($i = 0; $i < 4; $i++) {
-        //     $category = new Category();
-        //     if($i == 0) {
-        //         $category->setName('légumes');
-        //     }
-        //     if($i == 1) {
-        //         $category->setName('viandes');
-        //     }
-        //     if($i == 2) {
-        //         $category->setName('fromages');
-        //     }
-        //     if($i == 3) {
-        //         $category->setName('autres');
-        //     }
-        //     $manager->persist($category);
-        // }
+//         for($i = 0; $i < 4; $i++) {
+//             $category = new Category();
+//             if($i == 0) {
+//                 $category->setName('légumes');
+//             }
+//             if($i == 1) {
+//                 $category->setName('viandes');
+//             }
+//             if($i == 2) {
+//                 $category->setName('fromages');
+//             }
+//             if($i == 3) {
+//                 $category->setName('autres');
+//             }
+//             $manager->persist($category);
+//         }
 
         for($i = 0; $i < 24; $i++) {
             $product = new Product();
@@ -204,6 +204,7 @@ class AppFixtures extends Fixture
             }
             $manager->persist($product);
         }
+
 
         $manager->flush();
 

@@ -11,6 +11,7 @@ use App\Repository\OrderRepository;
 use App\Repository\PaymentRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +28,7 @@ class OrderController extends AbstractController
         private readonly PaymentRepository $paymentRepository,
     ){}
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/new', name: 'new', methods: ['GET','POST'])]
     public function new(Request $request, EntityManagerInterface $manager): JsonResponse
     {
@@ -67,6 +69,7 @@ class OrderController extends AbstractController
         return  $this->json($order,200, [],['groups' => 'order:read']);
 
     }
+    #[IsGranted('ROLE_USER')]
     #[Route('/payement/{id}', name: 'payement', methods: ['GET', 'POST'])]
     public function payment(Order $order, Request $request): Response
     {
